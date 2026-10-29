@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShimulVPN Remote Updater</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 24.dp;
+            max-width: 500px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+        .badge {
+            background-color: #238636;
+            color: #ffffff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        pre {
+            background-color: #0d1117;
+            text-align: left;
+            padding: 14px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #30363d;
+            color: #7ee787;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>ShimulVPN Config Server</h2>
+    <p>Current Active Version: <span class="badge">v2.0</span></p>
+    <p style="color: #8b949e;">এই পেজের JSON মেটাডাটা সরাসরি ShimulVPN অ্যাপে অটো-আপডেট হবে।</p>
+    
+    <h3>JSON API Output:</h3>
+    <pre id="json-output"></pre>
+</div>
+
+<script>
+const configData = {
+  "title": "ShimulVPN Production Config v2",
+  "version": 2,
+  "networks": [
+    {
+      "id": "ssh_direct_1",
+      "name": "SSH Direct Tunnel / HTTP Proxy",
+      "protocol": "ssh",
+      "customPayload": "GET / HTTP/1.1[crlf]Host: free.net[crlf]Upgrade: websocket[crlf][crlf]",
+      "sni": "free.net"
+    },
+    {
+      "id": "openvpn_ssl_1",
+      "name": "OpenVPN SSL / TCP Payload",
+      "protocol": "openvpn",
+      "sni": "vpn.ovpn.net"
+    },
+    {
+      "id": "hysteria_udp_1",
+      "name": "Hysteria v2 UDP Speed Tweak",
+      "protocol": "hysteria_udp",
+      "udpHysteriaPort": 443
+    },
+    {
+      "id": "slow_dns_1",
+      "name": "SlowDNS / DNSTT Unlimited Tweak",
+      "protocol": "slow_dns",
+      "dnsNameServer": "1.1.1.1",
+      "dnsPublicKey": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+    },
+    {
+      "id": "v2ray_vmess_1",
+      "name": "V2Ray / VMess CDN Bypass",
+      "protocol": "v2ray_vmess",
+      "sni": "cloudflare.com"
+    }
+  ],
+  "servers": [
+    {
+      "id": "srv_ssh_1",
+      "name": "SSH Server - US East Premium (v2)",
+      "host": "ssh-us.shimulvpn.net",
+      "port": 22,
+      "countryCode": "US",
+      "username": "vpnuser",
+      "password": "vpnpassword",
+      "supportedProtocol": "ssh"
+    },
+    {
+      "id": "srv_ovpn_1",
+      "name": "OpenVPN Core Server - DE Frankfurt (v2)",
+      "host": "ovpn-de.shimulvpn.net",
+      "port": 1194,
+      "countryCode": "DE",
+      "supportedProtocol": "openvpn"
+    },
+    {
+      "id": "srv_hysteria_1",
+      "name": "Hysteria UDP Server - SG Gaming (v2)",
+      "host": "udp-sg.shimulvpn.net",
+      "port": 443,
+      "countryCode": "SG",
+      "supportedProtocol": "hysteria_udp"
+    },
+    {
+      "id": "srv_dns_1",
+      "name": "DNSTT SlowDNS Server - NL Fast (v2)",
+      "host": "ns1.dns-nl.shimulvpn.net",
+      "port": 53,
+      "countryCode": "NL",
+      "supportedProtocol": "slow_dns"
+    },
+    {
+      "id": "srv_v2ray_1",
+      "name": "V2Ray VMess Server - JP CDN (v2)",
+      "host": "v2ray-jp.shimulvpn.net",
+      "port": 443,
+      "countryCode": "JP",
+      "supportedProtocol": "v2ray_vmess"
+    }
+  ]
+};
+
+document.getElementById("json-output").textContent = JSON.stringify(configData, null, 2);
+</script>
+
+</body>
+</html>

@@ -1,1 +1,82 @@
-
+{
+  "title": "ShimulVPN Production Config v2",
+  "version": 2,
+  "networks": [
+    {
+      "id": "ssh_direct_1",
+      "name": "SSH Direct Tunnel / HTTP Proxy",
+      "protocol": "ssh",
+      "customPayload": "GET / HTTP/1.1[crlf]Host: free.net[crlf]Upgrade: websocket[crlf][crlf]",
+      "sni": "free.net"
+    },
+    {
+      "id": "openvpn_ssl_1",
+      "name": "OpenVPN SSL / TCP Payload",
+      "protocol": "openvpn",
+      "sni": "vpn.ovpn.net"
+    },
+    {
+      "id": "hysteria_udp_1",
+      "name": "Hysteria v2 UDP Speed Tweak",
+      "protocol": "hysteria_udp",
+      "udpHysteriaPort": 443
+    },
+    {
+      "id": "slow_dns_1",
+      "name": "SlowDNS / DNSTT Unlimited Tweak",
+      "protocol": "slow_dns",
+      "dnsNameServer": "1.1.1.1",
+      "dnsPublicKey": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+    },
+    {
+      "id": "v2ray_vmess_1",
+      "name": "V2Ray / VMess CDN Bypass",
+      "protocol": "v2ray_vmess",
+      "sni": "cloudflare.com"
+    }
+  ],
+  "servers": [
+    {
+      "id": "srv_ssh_1",
+      "name": "SHIMUL",
+      "host": "139.59.118.220",
+      "port": 22,
+      "countryCode": "US",
+      "username": "homepro",
+      "password": "doyaemi",
+      "supportedProtocol": "ssh"
+    },
+    {
+      "id": "srv_ovpn_1",
+      "name": "OpenVPN Core Server - DE Frankfurt (v2)",
+      "host": "ovpn-de.shimulvpn.net",
+      "port": 1194,
+      "countryCode": "DE",
+      "supportedProtocol": "openvpn"
+    },
+    {
+      "id": "srv_hysteria_1",
+      "name": "Hysteria UDP Server - SG Gaming (v2)",
+      "host": "udp-sg.shimulvpn.net",
+      "port": 443,
+      "countryCode": "SG",
+      "supportedProtocol": "hysteria_udp"
+    },
+    {
+      "id": "srv_dns_1",
+      "name": "DNSTT SlowDNS Server - NL Fast (v2)",
+      "host": "ns1.dns-nl.shimulvpn.net",
+      "port": 53,
+      "countryCode": "NL",
+      "supportedProtocol": "slow_dns"
+    },
+    {
+      "id": "srv_v2ray_1",
+      "name": "V2Ray VMess Server - JP CDN (v2)",
+      "host": "v2ray-jp.shimulvpn.net",
+      "port": 443,
+      "countryCode": "JP",
+      "supportedProtocol": "v2ray_vmess"
+    }
+  ]
+}

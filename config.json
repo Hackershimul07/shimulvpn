@@ -1,19 +1,19 @@
 {
   "title": "ShimulVPN Production Config v2",
-  "version": 2,
+  "version": 3,
   "networks": [
     {
       "id": "ssh_direct_1",
       "name": "SSH Direct Tunnel / HTTP Proxy",
       "protocol": "ssh",
-      "customPayload": "GET / HTTP/1.1[crlf]Host: free.net[crlf]Upgrade: websocket[crlf][crlf]",
-      "sni": "free.net"
+      "customPayload": "GET / HTTP/1.1[crlf]Host: viberout-lp.viber.com[crlf]Upgrade: websocket[crlf][crlf]",
+      "sni": "viberout-lp.viber.com"
     },
     {
       "id": "openvpn_ssl_1",
       "name": "OpenVPN SSL / TCP Payload",
       "protocol": "openvpn",
-      "sni": "vpn.ovpn.net"
+      "sni": "viberout-lp.viber.com"
     },
     {
       "id": "hysteria_udp_1",
@@ -40,7 +40,7 @@
       "id": "srv_ssh_1",
       "name": "SHIMUL",
       "host": "139.59.118.220",
-      "port": 22,
+      "port": 443,
       "countryCode": "US",
       "username": "homepro",
       "password": "doyaemi",
